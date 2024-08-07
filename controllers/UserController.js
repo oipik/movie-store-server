@@ -1,23 +1,27 @@
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
-
+import config from "config";
 import UserModel from "../models/User.js";
 
-const KEY = "secretKeyforUser";
+const KEY = config.get("secretKey");
 
 export const register = async (req, res) => {
   try {
-    const pass = req.body.password;
+    const { email, password: pass } = req.body;
+    const existingUser = await UserModel.findOne({ email });
+
+    if (existingUser) {
+      return res.status(400).json({ message: "Пользователь с такой почтой уже есть!" })
+    }
+
     const salt = await bcrypt.genSalt(10);
     const passHash = await bcrypt.hash(pass, salt);
 
-    const document = new UserModel({
+    const user = await UserModel.create({
       name: req.body.name,
       email: req.body.email,
       password: passHash,
     });
-
-    const user = await document.save();
 
     const token = jwt.sign({
       id: user._id
