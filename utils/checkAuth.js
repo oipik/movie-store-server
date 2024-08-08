@@ -4,8 +4,8 @@ import config from "config";
 const KEY = config.get("secretKey");
 
 export default (req, res, next) => {
-  const token = (req.headers.authorization || "").split(" ")[1];
-  console.log(token)
+  const token = (req.headers.authorization || '').replace(/Bearer\s?/, '');
+
   if (!token) return res.status(403).json({ message: "Нет доступа!" });
 
   try {

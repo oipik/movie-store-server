@@ -1,7 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
 import config from "config";
-// import cors from "cors";
+import cors from "cors";
 
 import { registerValidation, loginValidation } from "./validation.js";
 import { checkAuth, handleValidationErrors } from "./utils/index.js";
@@ -19,6 +19,7 @@ mongoose.connect(
 });
 
 app.use(express.json());
+app.use(cors())
 
 app.post('/auth/login', loginValidation, handleValidationErrors, UserController.login);
 app.post('/auth/register', registerValidation, handleValidationErrors, UserController.register)
