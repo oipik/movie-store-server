@@ -1,7 +1,6 @@
 import jwt from "jsonwebtoken";
-import config from "config";
 
-const KEY = config.get("secretKey");
+const KEY = "secretKeyforUser";
 
 export default (req, res, next) => {
   const token = (req.headers.authorization || '').replace(/Bearer\s?/, '');

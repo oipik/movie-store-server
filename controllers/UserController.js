@@ -1,9 +1,8 @@
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
-import config from "config";
 import UserModel from "../models/User.js";
 
-const KEY = config.get("secretKey");
+const KEY = "secretKeyforUser";
 
 export const register = async (req, res) => {
   try {

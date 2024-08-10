@@ -1,6 +1,5 @@
 import express from "express";
 import mongoose from "mongoose";
-import config from "config";
 import cors from "cors";
 
 import { registerValidation, loginValidation } from "./validation.js";
@@ -8,7 +7,7 @@ import { checkAuth, handleValidationErrors } from "./utils/index.js";
 import * as UserController from "./controllers/UserController.js";
 
 const app = express();
-const PORT = config.get('port') ?? 3003;
+const PORT = 3003;
 
 mongoose.connect(
   process.env.MONGODB_URI || 'mongodb+srv://admin:admin@cluster1.jflpjkq.mongodb.net/db?retryWrites=true&w=majority&appName=Cluster1'
