@@ -1,5 +1,4 @@
 {
   "port": 3003,
-  "mongoUri": "mongodb+srv://admin:admin@cluster1.jflpjkq.mongodb.net/db?retryWrites=true&w=majority&appName=Cluster1",
   "secretKey": "secretKeyforUser"
 }
