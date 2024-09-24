@@ -9,24 +9,38 @@ import * as UserController from "./controllers/UserController.js";
 const app = express();
 const PORT = 3003;
 
-mongoose.connect(
-  process.env.MONGODB_URI || 'mongodb+srv://admin:admin@cluster1.jflpjkq.mongodb.net/db?retryWrites=true&w=majority&appName=Cluster1'
-).then(() => {
-  console.log('DB connected!');
-}).catch(err => {
-  console.log('DB error', err);
-});
+mongoose
+  .connect(
+    process.env.MONGODB_URI ||
+      "mongodb+srv://admin:admin@cluster1.jflpjkq.mongodb.net/db?retryWrites=true&w=majority&appName=Cluster1"
+  )
+  .then(() => {
+    console.log("DB connected!");
+  })
+  .catch((err) => {
+    console.log("DB error", err);
+  });
 
 app.use(express.json());
-app.use(cors())
+app.use(cors());
 
-app.post('/auth/login', loginValidation, handleValidationErrors, UserController.login);
-app.post('/auth/register', registerValidation, handleValidationErrors, UserController.register)
-app.get('/auth/me', checkAuth, UserController.getMe)
+app.post(
+  "/auth/login",
+  loginValidation,
+  handleValidationErrors,
+  UserController.login
+);
+app.post(
+  "/auth/register",
+  registerValidation,
+  handleValidationErrors,
+  UserController.register
+);
+app.get("/auth/me", checkAuth, UserController.getMe);
 
 app.listen(process.env.PORT || PORT, (err) => {
   if (err) {
     return console.log(err);
   }
-  console.log('Server started!');
+  console.log("Server started!");
 });

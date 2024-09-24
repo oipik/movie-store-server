@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 const KEY = "secretKeyforUser";
 
 export default (req, res, next) => {
-  const token = (req.headers.authorization || '').replace(/Bearer\s?/, '');
+  const token = (req.headers.authorization || "").replace(/Bearer\s?/, "");
 
   if (!token) return res.status(403).json({ message: "Нет доступа!" });
 
@@ -14,4 +14,4 @@ export default (req, res, next) => {
   } catch (error) {
     res.status(403).json({ message: "Нет доступа!" });
   }
-}
+};

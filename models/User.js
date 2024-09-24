@@ -17,8 +17,8 @@ const UserSchema = new Schema(
     },
   },
   {
-    timestamps: true
-  },
+    timestamps: true,
+  }
 );
 
 export default model("User", UserSchema);
